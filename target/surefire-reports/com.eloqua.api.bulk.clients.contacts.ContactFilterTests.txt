@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.eloqua.api.bulk.clients.contacts.ContactFilterTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.372 s <<< FAILURE! - in com.eloqua.api.bulk.clients.contacts.ContactFilterTests
-SearchFiltersTests(com.eloqua.api.bulk.clients.contacts.ContactFilterTests)  Time elapsed: 0.372 s  <<< ERROR!
-java.lang.NullPointerException
-	at com.eloqua.api.bulk.clients.contacts.ContactFilterTests.SearchFiltersTests(ContactFilterTests.java:18)
-

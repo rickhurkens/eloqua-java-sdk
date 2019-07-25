@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.eloqua.api.bulk.clients.contacts.ContactFieldTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.357 s <<< FAILURE! - in com.eloqua.api.bulk.clients.contacts.ContactFieldTests
-SearchFieldsTests(com.eloqua.api.bulk.clients.contacts.ContactFieldTests)  Time elapsed: 0.357 s  <<< ERROR!
-java.lang.NullPointerException
-	at com.eloqua.api.bulk.clients.contacts.ContactFieldTests.SearchFieldsTests(ContactFieldTests.java:18)
-

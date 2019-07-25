@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.eloqua.api.bulk.clients.contacts.ContactExportTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.101 s <<< FAILURE! - in com.eloqua.api.bulk.clients.contacts.ContactExportTests
-ExportTest(com.eloqua.api.bulk.clients.contacts.ContactExportTests)  Time elapsed: 4.058 s  <<< ERROR!
-java.lang.NullPointerException
-	at com.eloqua.api.bulk.clients.contacts.ContactExportTests.ExportTest(ContactExportTests.java:49)
-
