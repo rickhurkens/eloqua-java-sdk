@@ -3,8 +3,6 @@ package com.eloqua.api.bulk;
 import com.eloqua.api.Response;
 import com.eloqua.api.bulk.clients.contacts.*;
 import com.eloqua.api.bulk.clients.customObjects.*;
-import com.eloqua.api.bulk.models.ExportFilter;
-import com.eloqua.api.bulk.models.SearchResponse;
 import com.eloqua.api.bulk.models.login.AccountInfo;
 
 public class BulkClient extends BaseClient {

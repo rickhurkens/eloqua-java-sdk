@@ -14,7 +14,7 @@ public class CustomObjectImportClient {
 		_client = client;
 	}
 
-	public Import CreateImport(Import contactImport, int customObjectId) {
+	public Import createImport(Import contactImport, int customObjectId) {
 		Response response = _client.post("/customObject" + customObjectId + "/import", _client.Gson().toJson(contactImport));
 		
 		Import updatedImport = _client.Gson().fromJson(response.body, Import.class);		
@@ -22,7 +22,7 @@ public class CustomObjectImportClient {
 		return updatedImport;
 	}
 	
-	public Sync ImportData(String importUri, Map<String, String> data) {
+	public Sync importData(String importUri, Map<String, String> data) {
 		Response response = _client.post(importUri + "/data" , _client.Gson().toJson(data));
 		
 		Sync sync = _client.Gson().fromJson(response.body, Sync.class);		
@@ -30,7 +30,7 @@ public class CustomObjectImportClient {
 		return sync;		
 	}
 	
-	public Sync CheckSyncResult(Sync sync) {
+	public Sync checkSyncResult(Sync sync) {
 		Response response = _client.get(sync.uri + "/results");
 		
 		Sync syncResults = _client.Gson().fromJson(response.body, Sync.class);		

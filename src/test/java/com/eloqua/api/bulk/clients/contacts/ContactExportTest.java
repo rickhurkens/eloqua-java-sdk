@@ -13,22 +13,22 @@ import com.eloqua.api.bulk.models.FilterRuleType;
 import com.eloqua.api.bulk.models.Sync;
 import com.eloqua.api.bulk.models.SyncStatusType;
 
-public class ContactExportTests {
+public class ContactExportTest {
 	
 	@Test
 	public void ExportTest() 
 	{
 		// instantiate a new instance of the client
-		BulkClient client = new BulkClient("site", "user", "password", "https://secure.eloqua.com/API/Bulk/1.0");
+		BulkClient client = new BulkClient( "site", "user", "password", "https://secure.eloqua.com/API/Bulk/1.0");
 		
 		// define the list of fields to be included in the Export
-		// use : client.ContactFieldClient().Search(searchTerm, page, pageSize)
+		// use : client.ContactFieldClient().search(searchTerm, page, pageSize)
 		HashMap<String, String> fields = new HashMap<String, String>();
 		fields.put("C_EmailAddress", "{{Contact.Field(C_EmailAddress)}}");
 		fields.put("C_FirstName", "{{Contact.Field(C_FirstName)}}");
 		
 		// define the filter criteria for the export
-		// use : client.ContactFilterClient().Search(searchTerm, page, pageSize)
+		// use : client.ContactFilterClient().search(searchTerm, page, pageSize)
 		ExportFilter filter = new ExportFilter();
 		filter.filterRule = FilterRuleType.member;
 		filter.membershipUri = "/contact/segment/4268";

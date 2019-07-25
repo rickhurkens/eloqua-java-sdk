@@ -7,7 +7,7 @@ import com.eloqua.api.bulk.BulkClient;
 import com.eloqua.api.bulk.models.Field;
 import com.eloqua.api.bulk.models.SearchResponse;
 
-public class ContactFieldTests {
+public class ContactFieldTest {
 
 	@Test
 	public void SearchFieldsTests() {
@@ -15,6 +15,10 @@ public class ContactFieldTests {
 		
 		int count = 1;
 		SearchResponse<Field> fields = client.ContactFieldClient().Search("*", 1, count);
+
+		for(Object field : fields.elements) {
+			System.out.println(field.toString());
+		}
 		assertEquals(count, fields.total);
 	}
 }

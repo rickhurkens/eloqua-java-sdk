@@ -12,7 +12,7 @@ public class CustomObjectExportClient {
 		_client = client;
 	}
 
-	public Export CreateExport(Export export, int customObjectId) {
+	public Export createExport(Export export, int customObjectId) {
 		Response response = _client.post("/customObjects" + customObjectId + "/export", _client.Gson().toJson(export));
 		
 		Export updatedExport = _client.Gson().fromJson(response.body, Export.class);		
@@ -20,7 +20,7 @@ public class CustomObjectExportClient {
 		return updatedExport;
 	}
 	
-	public Sync CreateSync(Sync sync) {
+	public Sync createSync(Sync sync) {
 		Response response = _client.post("/sync", _client.Gson().toJson(sync));
 		
 		Sync updatedSync = _client.Gson().fromJson(response.body, Sync.class);		
@@ -28,7 +28,7 @@ public class CustomObjectExportClient {
 		return updatedSync;		
 	}
 	
-	public String GetExportData(String exportUri) {
+	public String getExportData(String exportUri) {
 		Response response = _client.get(exportUri + "/data");
 		
 		return response.body;
