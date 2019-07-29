@@ -7,17 +7,17 @@ import com.eloqua.api.bulk.models.SearchResponse;
 
 public class ContactFieldClient {
 
-	private BaseClient _client;
+	private BaseClient client;
 	
 	public ContactFieldClient(BaseClient client) {
-		_client = client;
+		this.client = client;
 	}
 	
-	public SearchResponse<Field> Search(String searchTerm, int page, int pageSize)
+	public SearchResponse<Field> search(String searchTerm, int page, int pageSize)
 	{
-		Response response = _client.get("/contact/fields?search=" + searchTerm + "&page=" + page + "&pageSize=" + pageSize );
+		Response response = client.get("/contact/fields?search=" + searchTerm + "&page=" + page + "&pageSize=" + pageSize );
 						
-		SearchResponse<Field> fields = _client.Gson().fromJson(response.body, SearchResponse.class);		
+		SearchResponse<Field> fields = client.getGson().fromJson(response.body, SearchResponse.class);
 
 		return fields;
 	}

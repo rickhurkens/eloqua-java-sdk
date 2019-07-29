@@ -22,13 +22,13 @@ public class ContactExportTest {
 		BulkClient client = new BulkClient( "site", "user", "password", "https://secure.eloqua.com/API/Bulk/1.0");
 		
 		// define the list of fields to be included in the Export
-		// use : client.ContactFieldClient().search(searchTerm, page, pageSize)
+		// use : client.contactFieldClient().search(searchTerm, page, pageSize)
 		HashMap<String, String> fields = new HashMap<String, String>();
 		fields.put("C_EmailAddress", "{{Contact.Field(C_EmailAddress)}}");
 		fields.put("C_FirstName", "{{Contact.Field(C_FirstName)}}");
 		
 		// define the filter criteria for the export
-		// use : client.ContactFilterClient().search(searchTerm, page, pageSize)
+		// use : client.contactFilterClient().search(searchTerm, page, pageSize)
 		ExportFilter filter = new ExportFilter();
 		filter.filterRule = FilterRuleType.member;
 		filter.membershipUri = "/contact/segment/4268";
@@ -41,7 +41,7 @@ public class ContactExportTest {
 		export.secondsToAutoDelete = 3600;
 		export.secondsToRetainData = 3600;
 				
-		Export exportResult = client.ContactExportClient().CreateExport(export);
+		Export exportResult = client.contactExportClient().createExport(export);
 
 		// create the sync for the Export
 		Sync sync = new Sync();
@@ -49,11 +49,11 @@ public class ContactExportTest {
 		sync.syncedInstanceUri = exportResult.uri;
 		
 		// check Sync results (use polling)
-		Sync syncResult = client.ContactExportClient().CreateSync(sync);
+		Sync syncResult = client.contactExportClient().createSync(sync);
 		assertNotNull(syncResult);
 		
 		// retrieve the data
-		Data data = client.ContactExportClient().GetExportData(exportResult.uri);		
+		Data data = client.contactExportClient().getExportData(exportResult.uri);
 		assertNotNull(data);
 	}
 }

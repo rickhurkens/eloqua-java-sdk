@@ -9,7 +9,7 @@
     <packaging>bundle</packaging>
     <name>Eloqua SDK for Java</name>
     <description>A software development kit for Java that helps developers build applications that integrate with Eloqua. Currently contains clients for the Bulk API.</description>
-    <version>1.0</version>
+    <version>2.0</version>
 
     <dependencies>
         <dependency>
@@ -52,8 +52,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>

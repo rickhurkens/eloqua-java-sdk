@@ -1,4 +1,4 @@
-package com.eloqua.api.bulk.clients.CustomObject;
+package com.eloqua.api.bulk.clients.customObject;
 
 import com.eloqua.api.bulk.BulkClient;
 import com.eloqua.api.bulk.models.Field;
@@ -13,9 +13,9 @@ public class CustomObjectFieldTest {
 	public void SearchFieldsTests() {
 		BulkClient client = new BulkClient("site", "user", "password", "https://secure.eloqua.com/API/Bulk/1.0");
 
-		SearchResponse<Field> fields = client.CustomObjectFieldClient().search("*", 229, 1, 0);
-        //SearchResponse<Field> fields = client.CustomObjectFieldClient().search(229, 1, 0);
-        //SearchResponse<Field> fields = client.CustomObjectFieldClient().search(229);
+		SearchResponse<Field> fields = client.customObjectFieldClient().search("*", 229, 1, 38);
+        //SearchResponse<Field> fields = client.customObjectFieldClient().search(229, 1, 0);
+        //SearchResponse<Field> fields = client.customObjectFieldClient().search(229);
 		System.out.println("count = " + fields.total);
 
         for(Object field : fields.elements) {

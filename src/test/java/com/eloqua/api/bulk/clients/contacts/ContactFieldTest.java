@@ -14,7 +14,7 @@ public class ContactFieldTest {
 		BulkClient client = new BulkClient("site", "user", "password", "https://secure.eloqua.com/API/Bulk/1.0");
 		
 		int count = 1;
-		SearchResponse<Field> fields = client.ContactFieldClient().Search("*", 1, count);
+		SearchResponse<Field> fields = client.contactFieldClient().search("*", 1, count);
 
 		for(Object field : fields.elements) {
 			System.out.println(field.toString());

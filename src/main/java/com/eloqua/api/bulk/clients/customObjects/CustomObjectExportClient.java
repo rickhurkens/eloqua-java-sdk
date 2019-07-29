@@ -5,32 +5,48 @@ import com.eloqua.api.bulk.BaseClient;
 import com.eloqua.api.bulk.models.Export;
 import com.eloqua.api.bulk.models.Sync;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CustomObjectExportClient {
-	private BaseClient _client;
-	
+	private BaseClient client;
+
+	private Map<String,String> exportUriToSyncUri = new HashMap<>();
+
 	public CustomObjectExportClient(BaseClient client) {
-		_client = client;
+		this.client = client;
 	}
 
 	public Export createExport(Export export, int customObjectId) {
-		Response response = _client.post("/customObjects" + customObjectId + "/export", _client.Gson().toJson(export));
+		Response response = client.post("customObjects/" + customObjectId + "/exports", client.getGson().toJson(export));
 		
-		Export updatedExport = _client.Gson().fromJson(response.body, Export.class);		
+		Export updatedExport = client.getGson().fromJson(response.body, Export.class);
 
 		return updatedExport;
 	}
 	
 	public Sync createSync(Sync sync) {
-		Response response = _client.post("/sync", _client.Gson().toJson(sync));
+		String syncUri = getSyncUri(sync);
+		Response response = client.get(syncUri);
 		
-		Sync updatedSync = _client.Gson().fromJson(response.body, Sync.class);		
+		Sync updatedSync = client.getGson().fromJson(response.body, Sync.class);
 
 		return updatedSync;		
 	}
 	
 	public String getExportData(String exportUri) {
-		Response response = _client.get(exportUri + "/data");
+		Response response = client.get(exportUri + "/data");
 		
 		return response.body;
 	}
+
+	private String getSyncUri(Sync sync) {
+        if (exportUriToSyncUri.containsKey(sync.syncedInstanceUri)) {
+            return exportUriToSyncUri.get(sync.syncedInstanceUri);
+        }
+        Response response = client.post("syncs", client.getGson().toJson(sync));
+        Sync intermediateSyncObject = client.getGson().fromJson(response.body, Sync.class);
+        exportUriToSyncUri.put(sync.syncedInstanceUri, intermediateSyncObject.uri);
+        return intermediateSyncObject.uri;
+    }
 }

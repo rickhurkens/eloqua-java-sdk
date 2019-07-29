@@ -8,32 +8,32 @@ import com.eloqua.api.bulk.models.Import;
 import com.eloqua.api.bulk.models.Sync;
 
 public class ContactImportClient {
-	private BaseClient _client;
+	private BaseClient client;
 	
 	public ContactImportClient(BaseClient client) {
-		_client = client;
+		this.client = client;
 	}
 
-	public Import CreateImport(Import contactImport) {
-		Response response = _client.post("/contact/import", _client.Gson().toJson(contactImport));
+	public Import createImport(Import contactImport) {
+		Response response = client.post("/contact/import", client.getGson().toJson(contactImport));
 		
-		Import updatedImport = _client.Gson().fromJson(response.body, Import.class);		
+		Import updatedImport = client.getGson().fromJson(response.body, Import.class);
 
 		return updatedImport;
 	}
 	
-	public Sync ImportData(String importUri, Map<String, String> data) {
-		Response response = _client.post(importUri + "/data" , _client.Gson().toJson(data));
+	public Sync importData(String importUri, Map<String, String> data) {
+		Response response = client.post(importUri + "/data" , client.getGson().toJson(data));
 		
-		Sync sync = _client.Gson().fromJson(response.body, Sync.class);		
+		Sync sync = client.getGson().fromJson(response.body, Sync.class);
 
 		return sync;		
 	}
 	
-	public Sync CheckSyncResult(Sync sync) {
-		Response response = _client.get(sync.uri + "/results");
+	public Sync checkSyncResult(Sync sync) {
+		Response response = client.get(sync.uri + "/results");
 		
-		Sync syncResults = _client.Gson().fromJson(response.body, Sync.class);		
+		Sync syncResults = client.getGson().fromJson(response.body, Sync.class);
 
 		return syncResults;
 	}

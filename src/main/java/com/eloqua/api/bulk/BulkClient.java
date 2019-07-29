@@ -9,77 +9,79 @@ public class BulkClient extends BaseClient {
 		public BulkClient(String site, String user, String password, String url) {
 		super(site, user, password, url);
 	}
+
+	private ContactFieldClient contactFieldClient;
+	private ContactFilterClient contactFilterClient;
+	private ContactImportClient contactImportClient;
+	private ContactExportClient contactExportClient;
+	private CustomObjectFieldClient customObjectFieldClient;
+	private CustomObjectFilterClient customObjectFilterClient;
+	private CustomObjectImportClient customObjectImportClient;
+	private CustomObjectExportClient customObjectExportClient;
 	
-	public static AccountInfo GetAccountInfo(String site, String user, String password) {
+	public static AccountInfo getAccountInfo(String site, String user, String password) {
 		BaseClient client = new BaseClient(site, user, password, "https://login.eloqua.com");
 		Response response = client.get("/id");
-		
-		AccountInfo info = client.Gson().fromJson(response.body, AccountInfo.class);		
+
+		response.body = response.body.replaceAll("\\{version}", "2.0");
+
+		AccountInfo info = client.getGson().fromJson(response.body, AccountInfo.class);
         return info;
 	}
 		
-	public ContactFieldClient ContactFieldClient() {
-		if (_contactFieldClient == null)
-			_contactFieldClient = new ContactFieldClient(this);
+	public ContactFieldClient contactFieldClient() {
+		if (contactFieldClient == null)
+			contactFieldClient = new ContactFieldClient(this);
 
-		return _contactFieldClient;
-	}	
-	private ContactFieldClient _contactFieldClient;
+		return contactFieldClient;
+	}
 
-	public ContactFilterClient ContactFilterClient() {
-		if (_contactFilterClient == null)
-			_contactFilterClient = new ContactFilterClient(this);
+	public ContactFilterClient contactFilterClient() {
+		if (contactFilterClient == null)
+			contactFilterClient = new ContactFilterClient(this);
 
-		return _contactFilterClient;
-	}	
-	private ContactFilterClient _contactFilterClient;
+		return contactFilterClient;
+	}
 
-	public ContactImportClient ContactImportClient() {
-		if (_contactImportClient == null)
-			_contactImportClient = new ContactImportClient(this);
+	public ContactImportClient contactImportClient() {
+		if (contactImportClient == null)
+			contactImportClient = new ContactImportClient(this);
 
-		return _contactImportClient;
-	}	
-	private ContactImportClient _contactImportClient;
+		return contactImportClient;
+	}
 	
-	public ContactExportClient ContactExportClient() {
-		if (_contactExportClient == null)
-			_contactExportClient = new ContactExportClient(this);
+	public ContactExportClient contactExportClient() {
+		if (contactExportClient == null)
+			contactExportClient = new ContactExportClient(this);
 
-		return _contactExportClient;
-	}	
-	private ContactExportClient _contactExportClient;
+		return contactExportClient;
+	}
 
-	public CustomObjectFieldClient CustomObjectFieldClient() {
-		if (_CustomObjectFieldClient == null)
-			_CustomObjectFieldClient = new CustomObjectFieldClient(this);
+	public CustomObjectFieldClient customObjectFieldClient() {
+		if (customObjectFieldClient == null)
+			customObjectFieldClient = new CustomObjectFieldClient(this);
 
-		return _CustomObjectFieldClient;
-	}	
-	private CustomObjectFieldClient _CustomObjectFieldClient;
+		return customObjectFieldClient;
+	}
 
-	public CustomObjectFilterClient CustomObjectFilterClient() {
-		if (_CustomObjectFilterClient == null)
-			_CustomObjectFilterClient = new CustomObjectFilterClient(this);
+	public CustomObjectFilterClient customObjectFilterClient() {
+		if (customObjectFilterClient == null)
+			customObjectFilterClient = new CustomObjectFilterClient(this);
 
-		return _CustomObjectFilterClient;
-	}	
-	private CustomObjectFilterClient _CustomObjectFilterClient;
+		return customObjectFilterClient;
+	}
 
-	public CustomObjectImportClient CustomObjectImportClient() {
-		if (_CustomObjectImportClient == null)
-			_CustomObjectImportClient = new CustomObjectImportClient(this);
+	public CustomObjectImportClient customObjectImportClient() {
+		if (customObjectImportClient == null)
+			customObjectImportClient = new CustomObjectImportClient(this);
 
-		return _CustomObjectImportClient;
-	}	
-	private CustomObjectImportClient _CustomObjectImportClient;
+		return customObjectImportClient;
+	}
 	
-	public CustomObjectExportClient CustomObjectExportClient() {
-		if (_CustomObjectExportClient == null)
-			_CustomObjectExportClient = new CustomObjectExportClient(this);
+	public CustomObjectExportClient customObjectExportClient() {
+		if (customObjectExportClient == null)
+			customObjectExportClient = new CustomObjectExportClient(this);
 
-		return _CustomObjectExportClient;
-	}	
-	private CustomObjectExportClient _CustomObjectExportClient;
-	
+		return customObjectExportClient;
+	}
 }

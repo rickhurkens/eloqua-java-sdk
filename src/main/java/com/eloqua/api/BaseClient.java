@@ -11,15 +11,15 @@ import java.io.OutputStream;
 
 public class BaseClient {
 	
-	private String _authToken;
-	private String _baseUrl;
+	private String authToken;
+	private String baseUrl;
 
 	public BaseClient(String site, String user, String password, String url)
 	{
-		_baseUrl = url;	
+		baseUrl = url;
 
 		String authString = site + "\\" + user + ":" + password;
-		_authToken = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(authString.getBytes());	
+		authToken = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(authString.getBytes());
 	}
 
 	public Response get(String uri)
@@ -48,7 +48,7 @@ public class BaseClient {
 
 		try
 		{
-			URL url = new URL(_baseUrl + uri);
+			URL url = new URL(baseUrl + uri);
 
 			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888));
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -57,7 +57,7 @@ public class BaseClient {
 			conn.setRequestMethod(method.toString());
 			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Accept", "application/json");
-			conn.setRequestProperty("Authorization", _authToken);
+			conn.setRequestProperty("Authorization", authToken);
 			
 			if (method == Method.POST || method == Method.PUT)
 			{

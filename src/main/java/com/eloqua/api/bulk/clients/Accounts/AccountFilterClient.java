@@ -6,17 +6,17 @@ import com.eloqua.api.bulk.models.ExportFilter;
 import com.eloqua.api.bulk.models.SearchResponse;
 
 public class AccountFilterClient {
-	private BaseClient _client;
+	private BaseClient client;
 
 	public AccountFilterClient(BaseClient client) {
-		_client = client;
+		this.client = client;
 	}
 	
-	public SearchResponse<ExportFilter> Search(String searchTerm, int page, int pageSize)
+	public SearchResponse<ExportFilter> search(String searchTerm, int page, int pageSize)
 	{
-		Response response = _client.get("/account/filters?search=" + searchTerm + "&page=" + page + "&pageSize=" + pageSize );
+		Response response = client.get("/account/filters?search=" + searchTerm + "&page=" + page + "&pageSize=" + pageSize );
 						
-		SearchResponse<ExportFilter> fields = _client.Gson().fromJson(response.body, SearchResponse.class);		
+		SearchResponse<ExportFilter> fields = client.getGson().fromJson(response.body, SearchResponse.class);
 
 		return fields;
 	}

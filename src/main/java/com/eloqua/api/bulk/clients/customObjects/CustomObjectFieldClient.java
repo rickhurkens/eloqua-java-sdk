@@ -25,7 +25,7 @@ public class CustomObjectFieldClient {
 			uriBuilder.append("pageSize=" + pageSize);
 		}
 		Response response = client.get(uriBuilder.toString());
-		SearchResponse<Field> fields = client.Gson().fromJson(response.body, SearchResponse.class);
+		SearchResponse<Field> fields = client.getGson().fromJson(response.body, SearchResponse.class);
 		return fields;
 	}
 
