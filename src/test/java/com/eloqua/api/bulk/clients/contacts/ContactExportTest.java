@@ -29,9 +29,7 @@ public class ContactExportTest {
 		
 		// define the filter criteria for the export
 		// use : client.contactFilterClient().search(searchTerm, page, pageSize)
-		ExportFilter filter = new ExportFilter();
-		filter.filterRule = FilterRuleType.member;
-		filter.membershipUri = "/contact/segment/4268";
+		String filter = "";
 		
 		// create the definition for the Export
 		Export export = new Export();

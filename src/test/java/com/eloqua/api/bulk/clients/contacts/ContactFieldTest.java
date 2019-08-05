@@ -16,9 +16,6 @@ public class ContactFieldTest {
 		int count = 1;
 		SearchResponse<Field> fields = client.contactFieldClient().search("*", 1, count);
 
-		for(Object field : fields.elements) {
-			System.out.println(field.toString());
-		}
 		assertEquals(count, fields.total);
 	}
 }

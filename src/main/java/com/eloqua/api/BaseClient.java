@@ -86,7 +86,8 @@ public class BaseClient {
 		catch (Exception e)		
 		{		
 			response.exception = e.getMessage();		
-		}		     
+		}
+
 		return response;		
 	}
 }

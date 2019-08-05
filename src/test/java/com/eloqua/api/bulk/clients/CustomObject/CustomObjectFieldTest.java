@@ -16,11 +16,7 @@ public class CustomObjectFieldTest {
 		SearchResponse<Field> fields = client.customObjectFieldClient().search("*", 229, 1, 38);
         //SearchResponse<Field> fields = client.customObjectFieldClient().search(229, 1, 0);
         //SearchResponse<Field> fields = client.customObjectFieldClient().search(229);
-		System.out.println("count = " + fields.total);
 
-        for(Object field : fields.elements) {
-            System.out.println(field.toString());
-        }
 		assertEquals(1, 1);
 	}
 }

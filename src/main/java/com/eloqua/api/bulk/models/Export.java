@@ -8,7 +8,7 @@ public class Export {
 	public String createdBy;
     public String createdAt;
     public HashMap<String, String> fields;
-    public ExportFilter filter;
+    public String filter;
     public Long kbUsed;
     public String name;
     public Integer secondsToAutoDelete;

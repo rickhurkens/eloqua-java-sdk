@@ -24,7 +24,8 @@ public class CustomObjectExportClient {
 
 		return updatedExport;
 	}
-	
+
+	// TODO: exact copy of customObjectExportClient
 	public Sync createSync(Sync sync) {
 		String syncUri = getSyncUri(sync);
 		Response response = client.get(syncUri);
@@ -36,9 +37,13 @@ public class CustomObjectExportClient {
 	
 	public String getExportData(String exportUri) {
 		Response response = client.get(exportUri + "/data");
-		
 		return response.body;
 	}
+
+    public String getExportData(String exportUri, String limit, String offset) {
+        Response response = client.get(exportUri + "/data" + "?limit=" + limit + "&offset=" + offset);
+        return response.body;
+    }
 
 	private String getSyncUri(Sync sync) {
         if (exportUriToSyncUri.containsKey(sync.syncedInstanceUri)) {
