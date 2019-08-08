@@ -5,6 +5,7 @@ import com.eloqua.api.bulk.BaseClient;
 import com.eloqua.api.bulk.models.ExportFilter;
 import com.eloqua.api.bulk.models.SearchResponse;
 
+// TODO: update to comply with current version of API
 public class AccountFilterClient {
 	private BaseClient client;
 

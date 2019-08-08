@@ -7,6 +7,7 @@ import com.eloqua.api.bulk.BaseClient;
 import com.eloqua.api.bulk.models.Import;
 import com.eloqua.api.bulk.models.Sync;
 
+// TODO: update to comply with current version of API
 public class ContactImportClient {
 	private BaseClient client;
 	

@@ -5,6 +5,7 @@ import com.eloqua.api.bulk.BaseClient;
 import com.eloqua.api.bulk.models.Field;
 import com.eloqua.api.bulk.models.SearchResponse;
 
+// TODO: update to comply with current version of API
 public class CustomObjectFieldClient {
 	private BaseClient client;
 	

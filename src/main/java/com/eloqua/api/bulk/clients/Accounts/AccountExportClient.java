@@ -5,6 +5,7 @@ import com.eloqua.api.bulk.BaseClient;
 import com.eloqua.api.bulk.models.Export;
 import com.eloqua.api.bulk.models.Sync;
 
+// TODO: update to comply with current version of API
 public class AccountExportClient {
 	private BaseClient client;
 	
