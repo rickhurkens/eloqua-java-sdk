@@ -2,8 +2,10 @@ package com.eloqua.api.bulk.clients.customObjects;
 
 import com.eloqua.api.Response;
 import com.eloqua.api.bulk.BaseClient;
+import com.eloqua.api.bulk.exception.EloquaSyncFailedException;
 import com.eloqua.api.bulk.models.Export;
 import com.eloqua.api.bulk.models.Sync;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,14 +21,11 @@ public class CustomObjectExportClient {
 
 	public Export createExport(Export export, int customObjectId) {
 		Response response = client.post("customObjects/" + customObjectId + "/exports", client.getGson().toJson(export));
-		
 		Export updatedExport = client.getGson().fromJson(response.body, Export.class);
-
 		return updatedExport;
 	}
 
-	// TODO: exact copy of customObjectExportClient
-	public Sync createSync(Sync sync) {
+	public Sync createSync(Sync sync) throws EloquaSyncFailedException {
 		String syncUri = getSyncUri(sync);
 		Response response = client.get(syncUri);
 		
@@ -45,13 +44,18 @@ public class CustomObjectExportClient {
         return response.body;
     }
 
-	private String getSyncUri(Sync sync) {
+	private String getSyncUri(Sync sync) throws EloquaSyncFailedException {
         if (exportUriToSyncUri.containsKey(sync.syncedInstanceUri)) {
             return exportUriToSyncUri.get(sync.syncedInstanceUri);
         }
         Response response = client.post("syncs", client.getGson().toJson(sync));
         Sync intermediateSyncObject = client.getGson().fromJson(response.body, Sync.class);
-        exportUriToSyncUri.put(sync.syncedInstanceUri, intermediateSyncObject.uri);
-        return intermediateSyncObject.uri;
+        if (intermediateSyncObject != null && StringUtils.isNotBlank(intermediateSyncObject.uri)) {
+            exportUriToSyncUri.put(sync.syncedInstanceUri, intermediateSyncObject.uri);
+            return intermediateSyncObject.uri;
+
+        } else {
+            throw new EloquaSyncFailedException(sync.syncedInstanceUri);
+        }
     }
 }

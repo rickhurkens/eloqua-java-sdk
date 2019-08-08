@@ -1,10 +1,8 @@
 package com.eloqua.api.bulk.clients.customObject;
 
 import com.eloqua.api.bulk.BulkClient;
-import com.eloqua.api.bulk.models.Data;
+import com.eloqua.api.bulk.exception.EloquaSyncFailedException;
 import com.eloqua.api.bulk.models.Export;
-import com.eloqua.api.bulk.models.ExportFilter;
-import com.eloqua.api.bulk.models.FilterRuleType;
 import com.eloqua.api.bulk.models.Sync;
 import com.eloqua.api.bulk.models.SyncStatusType;
 import com.eloqua.api.bulk.models.login.AccountInfo;
@@ -42,15 +40,21 @@ public class CustomObjectExportTest {
 
         Sync sync = new Sync();
         sync.syncedInstanceUri = exportResult.uri;
-        Sync syncResult = client.customObjectExportClient().createSync(sync);
-        while (syncResult.status == SyncStatusType.pending || syncResult.status == SyncStatusType.active) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+        try {
+            Sync syncResult = client.customObjectExportClient().createSync(sync);
+            while (syncResult.status == SyncStatusType.pending || syncResult.status == SyncStatusType.active) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                syncResult = client.customObjectExportClient().createSync(sync);
             }
-            syncResult = client.customObjectExportClient().createSync(sync);
+        } catch (EloquaSyncFailedException e) {
+            e.printStackTrace();
         }
+
 		
 		// retrieve the data
 		String data = client.customObjectExportClient().getExportData(exportResult.uri);
